@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 配置dataSource start -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+         init-method="init" destroy-method="close">
+
+       <!--jdbc配置-->
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <!--自动提交事务 默认是true -->
+        <property name="defaultAutoCommit" value="false"/>
+        <!--连接池最大使用连接数 默认是8-->
+        <property name="maxActive" value="50"/>
+        <!--初始连接数大小 默认为0 -->
+        <property name="initialSize" value="1"/>
+        <!--获取连接最大等待时间 默认不等待 -1-->
+        <property name="maxWait" value="60000"/>
+        <!--连接池的最大空闲数，默认是8 已经不建议使用 deprecated-->
+        <!--<property name="maxIdle" value="20"/>-->
+        <!--连接池最小空闲 默认是0 -->
+        <property name="minIdle" value="3"/>
+        <!--自动清除无用链接 默认没有设置 -->
+        <property name="removeAbandoned" value="true"/>
+        <!--清除无用链接等待时间，默认是5分钟 300 * 1000-->
+        <property name="removeAbandonedTimeout" value="300000"/>
+        <!--每多长时间运行一次空闲连接回收器 默认是60秒 60 * 1000L-->
+        <property name="timeBetweenEvictionRunsMillis" value="3600000" />
+        <!--池中的连接空闲多场时间后会被回收，默认是30分钟 1000L * 60 * 30 -->
+        <property name="minEvictableIdleTimeMillis" value="3600000" />
+        <!--数据库连接属性-->
+        <property name="connectProperties" value="clientEncoding=UTF-8"/>
+
+    </bean>
+    <!-- 配置dataSource end -->
+
+    <!-- 配置Spring的JdbcTemplate -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <!-- 配置Spring的NamedParameterJdbcTemplate -->
+    <bean id="namedParameterJdbcTemplate"
+          class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <!--配置简单jdbc插入实例bean，必须配置成非单例模式：scope="prototype"-->
+    <bean id="simpleJdbcInsert"
+          class="org.springframework.jdbc.core.simple.SimpleJdbcInsert" scope="prototype">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <!--配置Spring的事务管理-->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--Spring编程事务管理配置-->
+    <bean id="transactionTemplate"
+          class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
+    <!-- 启用基于注解行为的事务配置　　 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>

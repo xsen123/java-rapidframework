@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <display-name>rapid-sample Web Application</display-name>
+
+    <!--读取Spring配置文件 start-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:spring/spring.xml;
+            classpath:spring/spring-jdbc.xml;
+        </param-value>
+    </context-param>
+    <!--读取Spring配置文件 end-->
+
+    <!-- 设置应用的Root键值 start-->
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>appRoot</param-value>
+    </context-param>
+    <!-- 设置应用的Root键值 end -->
+
+    <!-- 日志管理配置  start -->
+    <!-- <context-param>
+         <param-name>log4jConfigLocation</param-name>
+         <param-value>classpath:log4j.properties</param-value>
+     </context-param>-->
+    <!-- 日志管理配置  end -->
+
+    <!-- Spring字符集编码过滤器 start -->
+    <filter>
+        <filter-name>SpringCharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>SpringCharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- Spring字符集编码过滤器 end -->
+
+    <!--监听Spring配置文件 start-->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    <!--监听Spring配置文件 end-->
+
+    <!--SpringMVC核心配置 start-->
+    <servlet>
+        <servlet-name>spring-mvc</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>spring-mvc</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+    <!--SpringMVC核心配置 end -->
+
+    <!--欢迎页面配置。配置为spring的url即可将该网址作为首页 start -->
+    <welcome-file-list>
+        <welcome-file>index.do</welcome-file>
+    </welcome-file-list>
+    <!--欢迎页面配置 end -->
+
+</web-app>
