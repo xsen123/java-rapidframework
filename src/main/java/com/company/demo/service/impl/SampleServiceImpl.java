@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 数据库增删改查的方法从JdbcRapidServiceImpl继承获得，不用再实现，方法列表详见JdbcRapidServiceImpl
+ */
 @Service
 @Transactional
 public class SampleServiceImpl extends JdbcRapidServiceImpl<Sample> implements ISampleService{

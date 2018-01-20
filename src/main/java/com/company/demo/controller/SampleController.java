@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * 示例主要演示了：
+ *   1. Service类继承自JdbcRapidServiceImpl的部分方法的使用
+ *   2. Controller类继承自BaseController的部分方法的使用
+ *   3. 鉴权注解PermissionCheck的使用
+ */
 @Controller
 @RequestMapping(value="/sample")
 public class SampleController extends BaseController {
