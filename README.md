@@ -1,19 +1,72 @@
 # Java-rapidframework
 ### 基于spring jdbc template封装的ORM快速开发框架
 
-- 项目的代码包含了如何使用该框架的示例代码和配置文件
+- 项目的代码包含框架核心代码、使用该框架的示例代码和配置文件，克隆整个工程后即可运行查看效果
 
 - docs目录中存放了用于测试的示例数据库sql文件和最新版rapidframework的jar包
 
-- 框架的核心代码为go.openus.rapidframework中的所有文件，可自行打成jar包后引入到第三方项目中使用
+- 框架的核心代码为go.openus.rapidframework中的所有文件，可自行打成jar包后引入到项目中使用
 
-- 框架的快速开发主要体现在两个方面：
+- 框架的快速开发主要体现在以下几个方面：
+ - **【Entity】**：实体类定义完成后，继承自框架的BaseEntity，并增加一个@Table注解即可实现表与实体类的映射（实体类就是普通的POJO，可使用其他自动化工具快速生成，例如MyBatis、Hibernate的代码生成工具）
+ - ***【Dao】***：不需要定义操作数据库的Dao文件，Dao对象由框架自动创建和调用，详见JdbcRapidServiceImpl和JdbcRapidDaoImpl）；
+ - **【Service】**：服务层接口和实现类分别继承自框架的IRapidService&lt;T&gt; 和 JdbcRapidServiceImpl&lt;T&gt;，Service就自动具备了操作实体类T对应的数据表的所有功能；
+ - **【Controller】**：控制器继承自框架的BaseController，Controller就自动具备了很多方便实用的方法（可选，但建议使用该方式）；
 
- - 项目中的业务Service接口和类只需要分别继承自IRapidService&lt;T&gt; 和 JdbcRapidServiceImpl&lt;T&gt;，Service就自动具备了增删改查功能，用以操作实体T对应的数据库表；
-
- - 项目中的Controller类只需要继承自BaseController，Controller就自动具备了很多方便实用的方法；
 
 - Service使用示例：
+
+  - Entity类
+
+  ```java
+  package com.company.demo.entity;
+
+  import go.openus.rapidframework.dao.annotation.Table;
+  import go.openus.rapidframework.entity.BaseEntity;
+
+  /**
+   * 实体类，可使用以下方式使用注解
+   * @Table // 默认表名为驼峰式类名转换为小写+下划线格式后的字符串
+   * @Table("sample")
+   * @Table(name = "sample")
+   * @Table(name = "sample", pkColumnName = "id") // pkColumnName默认为id
+   */
+  @Table
+  public class Sample extends BaseEntity {
+
+      private Integer id ;
+
+      /**
+       * 姓名
+       */
+      private String name;
+
+      /**
+       * 金额
+       */
+      private Double money;
+
+      public Integer getId() {
+          return id;
+      }
+      public void setId(Integer id) {
+          this.id = id;
+      }
+      public String getName() {
+          return name;
+      }
+      public void setName(String name) {
+          this.name = name;
+      }
+      public Double getMoney() {
+          return money;
+      }
+      public void setMoney(Double money) {
+          this.money = money;
+      }
+  }
+  ```
+
   - Service接口
 
   ```java
