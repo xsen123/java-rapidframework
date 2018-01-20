@@ -23,7 +23,7 @@
   import go.openus.rapidframework.service.IRapidService;
 
   /**
-   * 对数据库增删改查等操作的接口自动继承获得，不用再声明
+   * 对数据库增删改查等操作的接口继承获得，不用再声明，详见IRapidService
    */
   public interface ISampleService extends IRapidService<Sample> {
     // TODO: 这里声明业务接口
@@ -42,7 +42,7 @@
   import org.springframework.transaction.annotation.Transactional;
 
   /**
-   * 对数据库增删改查等操作的方法自动继承获得，不用再实现
+   * 对数据库增删改查等操作的方法继承获得，不用再实现，详见JdbcRapidServiceImpl
    */
   @Service
   @Transactional
@@ -51,7 +51,7 @@
   }
   ```
 
- - Controller类
+  - Controller类
 
   ```java
   package com.company.demo.controller;
@@ -67,6 +67,11 @@
   import javax.servlet.http.HttpServletRequest;
   import java.util.List;
 
+  /**
+   * 示例主要演示了：
+   *   1. Service类继承自JdbcRapidServiceImpl的部分方法的使用
+   *   2. Controller类继承自BaseController的部分方法的使用
+   */
   @Controller
   @RequestMapping(value="/sample")
   public class SampleController extends BaseController {
