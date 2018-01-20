@@ -76,10 +76,10 @@
   import go.openus.rapidframework.service.IRapidService;
 
   /**
-   * 数据库增删改查的接口继承时自动获得，不用再声明，详见IRapidService
+   * 数据库增删改查的接口从IRapidService继承获得，不用再声明，接口列表详见IRapidService
    */
   public interface ISampleService extends IRapidService<Sample> {
-    // TODO: 这里声明业务接口
+    // TODO: 这里声明业务接口...
   }
   ```
 
@@ -95,12 +95,12 @@
   import org.springframework.transaction.annotation.Transactional;
 
   /**
-   * 数据库增删改查的方法继承时自动获得，不用再实现，详见JdbcRapidServiceImpl
+   * 数据库增删改查的方法从JdbcRapidServiceImpl继承获得，不用再实现，方法列表详见JdbcRapidServiceImpl
    */
   @Service
   @Transactional
   public class SampleServiceImpl extends JdbcRapidServiceImpl<Sample> implements ISampleService{
-    // TODO: 这里编写业务方法
+    // TODO: 这里编写业务方法...
   }
   ```
 
