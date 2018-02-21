@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--引入jdbc配置文件-->
+    <context:property-placeholder location="classpath:conf/jdbc.properties"/>
+
+    <!--将多个配置文件引入到容器中交由Spring管理-->
+    <bean id="env"
+         class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations" value="classpath:/conf/*.properties"/>
+    </bean>
+
+    <!-- 扫描文件自动注入bean）-->
+    <context:component-scan base-package="go.openus.rapidframework.*,com.company.*">
+          <!--
+                 以下配置主要是为了避免与SpringMVC中的IOC容器冲突
+                 SpringMVC可以调用SpringIOC
+          -->
+          <context:exclude-filter type="annotation"
+                                  expression="org.springframework.stereotype.Controller"/>
+          <context:exclude-filter type="annotation"
+                                  expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+
+</beans>

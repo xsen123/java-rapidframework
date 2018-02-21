@@ -1,11 +1,11 @@
-# Java-rapidframework
+# Java-Rapidframework
 ### 基于spring jdbc template封装的ORM快速开发框架
 
 - 项目的代码包含框架核心代码、使用该框架的示例代码和配置文件，克隆整个工程后即可运行查看效果
 
-- docs目录中存放了用于测试的示例数据库sql文件和最新版rapidframework的jar包
+- docs目录中存放了最新版rapidframework-core的jar包和用于demo测试的数据库sql文件
 
-- 框架的核心代码为go.openus.rapidframework中的所有文件，可自行打成jar包后引入到项目中使用
+- 框架的核心代码为rapidframework-core模块中的文件，可自行打成jar包后引入到项目中使用
 
 - 框架的快速开发主要体现在以下几个方面：
   - **【Entity】**：实体类定义完成后，继承自框架的BaseEntity，并增加一个@Table注解即可实现表与实体类的映射（实体类就是普通的POJO，可使用其他自动化工具快速生成，例如MyBatis、Hibernate的代码生成工具）
