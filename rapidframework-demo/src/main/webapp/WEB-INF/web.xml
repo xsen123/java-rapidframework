@@ -82,4 +82,12 @@
     </welcome-file-list>
     <!--欢迎页面配置 end -->
 
+    <!-- 重新设定session的Cookie名称，以防同一IP或域名下的节点重复 -->
+    <session-config>
+        <cookie-config>
+            <name>JSESSIONID4RFD</name>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+
 </web-app>
