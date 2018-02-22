@@ -2,6 +2,7 @@ package com.company.demo.controller;
 
 import com.company.demo.common.Constants;
 import go.openus.rapidframework.controller.BaseController;
+import go.openus.rapidframework.utils.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,7 +19,11 @@ public class IndexController extends BaseController {
     @RequestMapping("login")
     public String login(){
         setSessionAttribute(Constants.SESSION_LOGIN_USER_ID, "somebody");
-        return "redirect:/index.do";
+        String url = getParameterValue("url");
+        if(StringUtils.isEmpty(url)){
+            url = "/index.do";
+        }
+        return "redirect:"+url;
     }
 
 }

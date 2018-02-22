@@ -55,8 +55,8 @@ public class PermissionCheckInterceptor extends HandlerInterceptorAdapter{
 					url += "from=auth&";
 				}
 				String param = URLEncoder.encode(url,"UTF-8");
-				//String redirectURL = basePath + "login.do?url=" + param;
-				String redirectURL = basePath + "index.do"; // 演示代码，跳转到首页
+				String redirectURL = basePath + "login.do?url=" + param;
+				//String redirectURL = basePath + "index.do"; // 演示代码，跳转到首页
 				response.sendRedirect(redirectURL);
 				return false;
 			}
