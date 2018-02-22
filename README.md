@@ -10,13 +10,13 @@
 - 框架的快速开发主要体现在以下几个方面：
   - **【Entity】**：实体类定义完成后，继承自框架的BaseEntity，并增加一个@Table注解即可实现表与实体类的映射（实体类就是普通的POJO，可使用其他自动化工具快速生成，例如MyBatis、Hibernate的代码生成工具）
   - <del>**【Dao】**</del>：一般情况下，不需要定义操作数据库的Dao文件，Dao对象由框架自动创建和调用，详见JdbcRapidServiceImpl和JdbcRapidDaoImpl；
-  - **【Service】**：服务层接口和实现类分别继承自框架的IRapidService&lt;T&gt; 和 JdbcRapidServiceImpl&lt;T&gt;，Service就自动具备了操作实体类T对应的数据表的所有功能；
-  - **【Controller】**：控制器继承自框架的BaseController，Controller就自动具备了很多方便实用的方法（可选，但建议使用该方式）；
+  - **【Service】**：服务层接口和实现类分别继承自框架的IRapidService&lt;T&gt; 和 JdbcRapidServiceImpl&lt;T&gt;，Service类就自动具备了操作实体类&lt;T&gt对应的数据表的所有功能；
+  - **【Controller】**：控制器继承自框架的BaseController，Controller类就自动具备了很多方便实用的方法（可选，但建议使用该方式）；
 
 
-- 框架使用示例：
+- 快速开发示例：
 
-  - Entity类
+  - 定义Entity类
 
   ```java
   package com.company.demo.entity;
@@ -67,7 +67,7 @@
   }
   ```
 
-  - Service接口
+  - 定义Service接口
 
   ```java
   package com.company.demo.service;
@@ -83,7 +83,7 @@
   }
   ```
 
-  - Service实现类
+  - 定义Service实现类
 
   ```java
   package com.company.demo.service.impl;
@@ -104,7 +104,7 @@
   }
   ```
 
-  - Controller类
+  - 定义Controller类
 
   ```java
   package com.company.demo.controller;
