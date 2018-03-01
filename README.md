@@ -1,17 +1,10 @@
 # Java-Rapidframework
 ### 基于Spring JDBC Template封装的ORM快速开发框架
-
-- 项目的代码包含框架核心代码、使用该框架的示例代码和配置文件，克隆整个工程后即可运行查看效果
-
-- docs目录中存放了最新版rapidframework-core的jar包和用于demo测试的数据库sql文件
-
-- 框架的核心代码为rapidframework-core模块中的文件，可自行打成jar包后引入到项目中使用
-
 - 框架的快速开发主要体现在以下几个方面：
   - **【Entity】**：实体类定义完成后，继承自框架的BaseEntity，并增加一个@Table注解即可实现表与实体类的映射（实体类就是普通的POJO，可使用其他自动化工具快速生成，例如MyBatis、Hibernate的代码生成工具）
   - <del>**【Dao】**</del>：一般情况下，不需要定义操作数据库的Dao文件，Dao对象由框架自动创建和调用，详见JdbcRapidServiceImpl和JdbcRapidDaoImpl；
   - **【Service】**：服务层接口和实现类分别继承自框架的IRapidService&lt;T&gt; 和 JdbcRapidServiceImpl&lt;T&gt;，Service类就自动具备了操作实体类&lt;T&gt;对应的数据表的所有功能；
-  - **【Controller】**：控制器继承自框架的BaseController，Controller类就自动具备了很多方便实用的方法（可选，但建议使用该方式）；
+  - **【Controller】**：控制器继承自框架的BaseController，Controller类就自动具备了很多HTTP交互相关的实用方法（可选，但建议使用该方式）；
 
 
 - 快速开发示例：
@@ -25,7 +18,7 @@
   import go.openus.rapidframework.entity.BaseEntity;
 
   /**
-   * 实体类，可使用以下方式使用注解
+   * 实体类，可选择以下注解方式
    * @Table // 默认表名为驼峰式类名转换为小写+下划线格式后的字符串
    * @Table("sample")
    * @Table(name = "sample")
@@ -163,3 +156,11 @@
       }
   }
   ```
+
+- 工程使用maven进行管理，包含工具类(util)、框架(core)和演示(demo)三个模块
+
+- core模块是整体框架代码，不依赖util，第三方项目只需要引入该模块的jar包及其依赖的jar包即可(最新版rapidframework-core的jar包)
+
+- 克隆整个工程后，执行docs中的sql文件，即可在demo中查看演示效果、调试演示代码和JUnit测试代码
+
+- 框架目前已在多个项目中使用，开发高效，运行稳定，非常适合快速开发基于Spring的Java项目
