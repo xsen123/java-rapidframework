@@ -1,7 +1,7 @@
 # Java-Rapidframework
 ### 基于Spring JDBC Template封装的ORM快速开发框架
 - 框架的快速开发主要体现在以下几个方面：
-  - **【Entity】**：实体类定义完成后，继承自框架的BaseEntity，并增加一个@Table注解即可实现表与实体类的映射（实体类就是普通的POJO，可使用其他自动化工具快速生成，例如MyBatis、Hibernate的代码生成工具）
+  - **【Entity】**：实体类定义完成后，修改为继承自框架的BaseEntity，并增加一个@Table注解即可实现表与实体类的映射（实体类就是普通的POJO，可使用其他自动化工具快速生成，例如MyBatis、Hibernate的代码生成工具）
   - <del>**【Dao】**</del>：一般情况下，不需要定义操作数据库的Dao文件，Dao对象由框架自动创建和调用，详见JdbcRapidServiceImpl和JdbcRapidDaoImpl；
   - **【Service】**：服务层接口和实现类分别继承自框架的IRapidService&lt;T&gt; 和 JdbcRapidServiceImpl&lt;T&gt;，Service类就自动具备了操作实体类&lt;T&gt;对应的数据表的所有功能；
   - **【Controller】**：控制器继承自框架的BaseController，Controller类就自动具备了很多HTTP交互相关的实用方法（可选，但建议使用该方式）；
@@ -127,14 +127,14 @@
 
       @RequestMapping("index")
       public String index(){
-          List<Sample> list = sampleService.query();
+          List<Sample> list = sampleService.query(); // 该方法继承获得
           setRequestAttribute("count", list.size());
           return "sample/index";
       }
 
       @RequestMapping("count")
       public String count(String name){
-          List<Sample> list = sampleService.query("name=?", name);
+          List<Sample> list = sampleService.query("name=?", name); // 该方法继承获得
           setRequestAttribute("count", list.size());
           return "sample/index";
       }
@@ -142,7 +142,7 @@
       @RequestMapping({"view", "show"})
       public String view(){
           String id = getParameterValue("id");
-          Sample sample = sampleService.fetch(id);
+          Sample sample = sampleService.fetch(id); // 该方法继承获得
           setRequestAttribute("sample", sample);
           return "sample/view";
       }
@@ -151,7 +151,7 @@
       public String insert(){
           Sample sample = new Sample();
           sample.setName("张三");
-          Integer id = sampleService.insertReturnKey(sample);
+          Integer id = sampleService.insertReturnKey(sample); // 该方法继承获得
           return "redirect:/sample/show.do?id="+id;
       }
   }
