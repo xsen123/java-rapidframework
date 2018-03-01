@@ -157,10 +157,10 @@
   }
   ```
 
-- 工程使用maven进行管理，包含工具类(util)、框架(core)和演示(demo)三个模块
+- 工程使用maven进行管理，包含工具类(util)、框架(core)和演示(demo)三个模块，其中core模块是整个框架的代码
 
-- core模块是整体框架代码，不依赖util，第三方项目只需要引入该模块的jar包及其依赖的jar包即可(最新版rapidframework-core的jar包)
+- 第三方项目只需要引入core模块的jar包及其依赖的jar包即可(最新版rapidframework-core的jar包)
 
-- 克隆整个工程后，执行docs中的sql文件，即可在demo中查看演示效果、调试演示代码和JUnit测试代码
+- 克隆整个工程，用docs中的sql文件创建数据库后，即可在demo中查看演示效果、调试演示代码和JUnit测试代码
 
-- 框架目前已在多个项目中使用，开发高效，运行稳定，非常适合快速开发基于Spring的Java项目
+- 目前已在多个项目中使用了该框架，开发高效，运行稳定，非常适合快速开发基于Spring的Java项目
