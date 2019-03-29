@@ -4,7 +4,7 @@ Navicat MySQL Data Transfer
 Source Server         : Z_本地数据库
 Source Server Version : 50622
 Source Host           : localhost:3306
-Source Database       : rapid-jdbc-test
+Source Database       : rapid_jdbc_test
 
 Target Server Type    : MYSQL
 Target Server Version : 50622
